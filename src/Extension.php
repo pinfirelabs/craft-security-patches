@@ -15,7 +15,7 @@ use yii\base\Event;
 use yii\web\BadRequestHttpException;
 
 /**
- * Generator Yii2 Extension
+ * Security Patches Extension
  *
  * @author Pixel & Tonic, Inc. <support@pixelandtonic.com>
  */

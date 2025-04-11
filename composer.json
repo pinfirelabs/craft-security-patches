@@ -18,9 +18,9 @@
   ],
   "support": {
     "email": "support@craftcms.com",
-    "issues": "https://github.com/craftcms/generator/issues?state=open",
-    "source": "https://github.com/craftcms/generator",
-    "rss": "https://github.com/craftcms/generator/releases.atom"
+    "issues": "https://github.com/craftcms/security-patches/issues?state=open",
+    "source": "https://github.com/craftcms/security-patches",
+    "rss": "https://github.com/craftcms/security-patches/releases.atom"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
