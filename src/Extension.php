@@ -12,6 +12,7 @@ use craft\controllers\AssetsController;
 use craft\models\UpdateRelease;
 use yii\base\ActionEvent;
 use yii\base\BootstrapInterface;
+use yii\base\Controller;
 use yii\base\Event;
 use yii\web\BadRequestHttpException;
 use craft\events\UpdateReleaseEvent;
@@ -34,7 +35,7 @@ class Extension implements BootstrapInterface
     public function bootstrap($app)
     {
         // GHSA-f3gw-9ww9-jmc3
-        Event::on(AssetsController::class, AssetsController::EVENT_BEFORE_ACTION, function(ActionEvent $event) {
+        Event::on(AssetsController::class, Controller::EVENT_BEFORE_ACTION, function(ActionEvent $event) {
             if ($event->action->id === 'generate-transform') {
                 $handle = Craft::$app->request->getBodyParam('handle');
                 if ($handle && !is_string($handle)) {
