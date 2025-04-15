@@ -23,7 +23,7 @@ use craft\events\UpdateReleaseEvent;
  */
 class Extension implements BootstrapInterface
 {
-    private array $handledVersions = [
+    private $handledVersions = [
         'craftcms/cms' => [
             '3.9.15',
             '4.14.15',
