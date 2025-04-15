@@ -9,10 +9,12 @@ namespace craft\sp;
 
 use Craft;
 use craft\controllers\AssetsController;
+use craft\models\UpdateRelease;
 use yii\base\ActionEvent;
 use yii\base\BootstrapInterface;
 use yii\base\Event;
 use yii\web\BadRequestHttpException;
+use craft\events\UpdateReleaseEvent;
 
 /**
  * Security Patches Extension
@@ -21,6 +23,14 @@ use yii\web\BadRequestHttpException;
  */
 class Extension implements BootstrapInterface
 {
+    private array $handledVersions = [
+        'craftcms/cms' => [
+            '3.9.15',
+            '4.14.15',
+            '5.6.17',
+        ],
+    ];
+
     public function bootstrap($app)
     {
         // GHSA-f3gw-9ww9-jmc3
@@ -32,5 +42,21 @@ class Extension implements BootstrapInterface
                 }
             }
         });
+
+        if (
+            class_exists(UpdateRelease::class) &&
+            defined(sprintf('%s::EVENT_IS_CRITICAL', UpdateRelease::class))
+        ) {
+            Event::on(UpdateRelease::class, UpdateRelease::EVENT_IS_CRITICAL, function(UpdateReleaseEvent $event) {
+                /** @var UpdateRelease $release */
+                $release = $event->sender;
+                if (
+                    isset($this->handledVersions[$event->update->packageName]) &&
+                    in_array($release->version, $this->handledVersions[$event->update->packageName])
+                ) {
+                    $event->handled = true;
+                }
+            });
+        }
     }
 }
