@@ -7,6 +7,10 @@ Provides security patches for out-of-date Craft CMS installs.
 > Craft CMS up-to-date. Maintaining a regular update cadence to ensure Craft CMS is kept up-to-date on a
 > [supported version](https://craftcms.com/knowledge-base/supported-versions) is highly recommended.
 
+## Compatibility
+
+This extension is compatible with Craft CMS 3.6.0+, 4.0.0+, and 5.0.0+.
+
 ## Installation
 
 To install, run the following command within a Craft 3/4/5 project:
