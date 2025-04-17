@@ -32,3 +32,6 @@ composer require craftcms/security-patches:dev-main
 - `GHSA-f3gw-9ww9-jmc3` (RCE, pending CVE)
   - Affects Craft CMS 3.0.0 – 3.9.14, 4.0.0 – 4.14.14, and 5.0.0 – 5.6.16
   - Fixed in Craft CMS 3.9.15, 4.14.15, and 5.6.17
+- `CVE-2024-56145`
+  - Affects Craft CMS 3.0.0 – 3.9.13, 4.0.0 – 4.13.1, and 5.0.0 – 5.5.1
+  - Fixed in Craft CMS 3.9.14, 4.13.2, and 5.5.2

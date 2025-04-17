@@ -10,7 +10,9 @@ namespace craft\sp;
 use Craft;
 use craft\controllers\AssetsController;
 use craft\models\UpdateRelease;
+use craft\web\Application as WebApplication;
 use yii\base\ActionEvent;
+use yii\base\Application;
 use yii\base\BootstrapInterface;
 use yii\base\Controller;
 use yii\base\Event;
@@ -34,6 +36,16 @@ class Extension implements BootstrapInterface
 
     public function bootstrap($app)
     {
+        // CVE-2024-56145
+        Event::on(Application::class, WebApplication::EVENT_INIT, function() {
+            if (
+                !Craft::$app->getRequest()->getIsConsoleRequest() &&
+                !empty($_SERVER['argv'])
+            ) {
+                throw new BadRequestHttpException('argv not accepted on web requests.');
+            }
+        });
+
         // GHSA-f3gw-9ww9-jmc3
         Event::on(AssetsController::class, Controller::EVENT_BEFORE_ACTION, function(ActionEvent $event) {
             if ($event->action->id === 'generate-transform') {
